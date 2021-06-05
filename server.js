@@ -30,7 +30,7 @@ app.use('/api',userApi);
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname,'./views/index.html'));
 })
-
+console.log("server");
 //listen the port
 app.listen(port,function(){
     console.log(`Server has started at ${port}`);
