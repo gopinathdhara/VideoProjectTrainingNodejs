@@ -27,6 +27,9 @@ app.use(function(req, res, next) {
 app.use('/api',videoApi);
 app.use('/api',userApi);
 //create a basic routing 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname,'./views/index.html'));
 })
