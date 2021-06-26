@@ -7,7 +7,7 @@ let userModel= require("../model/users");
 let jwt=require("jsonwebtoken");
 let checkAuth= require("../middleware/CheckAuth");
 //db connection
-require("../dbconnection/dbConnection");
+require("../dbConnection/dbConnection");
 
 
 //insert new user

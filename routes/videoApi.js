@@ -5,7 +5,7 @@ let videoModel= require("../model/video");
 let checkAuth= require("../middleware/CheckAuth");
 var mongoose = require('mongoose');
 //db connection
-require("../dbconnection/dbConnection");
+require("../dbConnection/dbConnection");
 
 //all videos for home page
 router.get("/allvideos",async (req,res)=>{  
