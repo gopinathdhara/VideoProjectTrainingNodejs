@@ -6,6 +6,34 @@ let checkAuth= require("../middleware/CheckAuth");
 var mongoose = require('mongoose');
 //db connection
 require("../dbconnection/dbConnection");
+
+//all videos for home page
+router.get("/allvideos",async (req,res)=>{  
+  try { 
+      //const videos = await videoModel.find({}).exec();
+      //console.log(req.usertoken);
+      const videos = await videoModel.aggregate([
+        {
+          $lookup:
+            {
+              from: "users",
+              localField: "user_id",
+              foreignField: "_id",
+              as: "userDetails"
+            },
+            
+       },
+       { $sort: {"_id": -1} }
+     ])
+      res.status(200).json({"status":200,"data": videos });  
+    } catch (err) {
+      console.log(err);   
+      res.status(400).json({"status":400,"error":err.message});
+    }
+})
+
+
+
 //video listing
 router.get("/videos",checkAuth,async (req,res)=>{  
     try {

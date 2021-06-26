@@ -34,9 +34,11 @@ router.post("/users/signup",async (req,res)=>{
 //login api
 router.post("/users/signin",async (req,res)=>{ 
         let email=req.body.email;
+		console.log(email);
         let pass1=req.body.password;
         try {
             const user = await userModel.find({"email":email}).exec();  
+			console.log(user);
             if(user.length==0){
                 res.status(400).json({"status":400,'message':'No Such User exists' });  
             }else{
@@ -45,8 +47,8 @@ router.post("/users/signin",async (req,res)=>{
                     const token=jwt.sign({
                         email: user[0].email,
                         userId: user[0]._id,
-                      }, 'secret', { expiresIn: 60 * 60 });
-                    res.status(200).json({"status":200,"message":"success","token":token});
+                      }, 'secret', { expiresIn: 60 * 60 *5 });
+                    res.status(200).json({"status":200,"message":"success","token":token,"user":user});
                 }else{
                     res.status(400).json({"status":400,'message':'Invalid email or password' });  
                 }
